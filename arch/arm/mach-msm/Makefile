@@ -318,6 +318,7 @@ obj-$(CONFIG_MACH_MPQ8064_HRD) += board-8064-all.o board-8064-regulator.o
 obj-$(CONFIG_MACH_MPQ8064_DTV) += board-8064-all.o board-8064-regulator.o
 obj-$(CONFIG_MACH_MONARUDO) += board-monarudo-all.o board-monarudo-regulator.o
 obj-$(CONFIG_MACH_M7_UL) += board-m7-all.o board-m7-regulator.o
+obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
 
 obj-$(CONFIG_MACH_MONARUDO) += htc_util.o
 obj-$(CONFIG_MACH_M7_UL) += htc_util.o
