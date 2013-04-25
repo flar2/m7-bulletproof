@@ -82,5 +82,12 @@ GSYMS
 GTAGS
 
 *.orig
+*.rej
+*.oc
+*.nooc
+*.patch
 *~
+*.list
+modules
+stock
 \#*#
