@@ -2151,7 +2151,7 @@ static void synaptics_ts_button_func(struct synaptics_ts_data *ts)
 		get_address_base(ts, 0x1A, DATA_BASE), &data, 1);
 	if (data) {
 		if (data & 0x01) {
-			printk("[TP] back key pressed\n");
+			printk("[TP] back key pressed data=%i\n", data);
 			vk_press = 1;
 			button_id = 1;
 
@@ -2209,7 +2209,7 @@ static void synaptics_ts_button_func(struct synaptics_ts_data *ts)
 			}
 		}
 		else if (data & 0x02) {
-			printk("[TP] home key pressed\n");
+			printk("[TP] home key pressed data=%i\n", data);
 			vk_press = 1;
 			button_id = 2;
 
@@ -2267,7 +2267,7 @@ static void synaptics_ts_button_func(struct synaptics_ts_data *ts)
 			}
 		}
 	}else {
-		printk("[TP] virtual key released\n");
+		printk("[TP] virtual key released data=%i\n", data);
 		vk_press = 0;
 		if (ts->htc_event == SYN_AND_REPORT_TYPE_A) {
 			if (ts->support_htc_event) {
