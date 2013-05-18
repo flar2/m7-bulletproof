@@ -242,6 +242,25 @@ void logo2menu_menutrigger(void) {
         return;
 } 
 
+static void logo2menu_presshome(struct work_struct * logo2menu_presshome_work) {
+	struct synaptics_ts_data *ts = gl_ts;
+	break_longtap_count = 1;
+        printk("sending event KEY_HOME 1\n");
+        input_event(ts->input_dev, EV_KEY, KEY_HOME, 1);
+        input_sync(ts->input_dev);
+        msleep(100);
+        input_event(ts->input_dev, EV_KEY, KEY_HOME, 0);
+        input_sync(ts->input_dev);
+        msleep(100);
+        return;
+}
+static DECLARE_WORK(logo2menu_presshome_work, logo2menu_presshome);
+
+void logo2menu_hometrigger(void) {
+                schedule_work(&logo2menu_presshome_work);
+        return;
+}
+
 // if finger is released, set this to 1, means longtap count can begin. If user keeps finger on screen, dont allow it after one count went down...
 static int allow_longtap_count = 1;
 
@@ -2043,6 +2062,10 @@ static void logo2wake_func(void) {
 	if (l2m_switch == 1 && scr_suspended == false && ((l2m_time[0]-l2m_time[1]) < L2M_TIMEOUT)) {     
 		printk(KERN_INFO"[L2M]: menu button activated\n");
 		logo2menu_menutrigger();  
+	}
+	else if (l2m_switch == 2 && scr_suspended == false && ((l2m_time[0]-l2m_time[1]) < L2M_TIMEOUT)) {
+		printk(KERN_INFO"[L2M]: home button activated\n");
+		logo2menu_hometrigger();
 	}
 
         return;
